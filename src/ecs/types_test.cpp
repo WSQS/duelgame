@@ -1,5 +1,6 @@
 #include <ecs/types.h>
 #include <iostream>
+#include <type_traits>
 
 /**
  * @brief 编译验证程序
@@ -82,7 +83,33 @@ int main() {
     (void)are_equal;
     (void)are_not_equal;
 
+    // 验证 to_underlying 的类型推导正确性
+    // EntityId 应该返回 uint64_t
+    static_assert(std::is_same_v<decltype(sop::ecs::to_underlying(entity_id)), uint64_t>,
+                  "EntityId to_underlying should return uint64_t");
+
+    // ComponentTypeId 应该返回 uint32_t
+    static_assert(std::is_same_v<decltype(sop::ecs::to_underlying(component_type_id)), uint32_t>,
+                  "ComponentTypeId to_underlying should return uint32_t");
+
+    // SystemId 应该返回 uint32_t
+    static_assert(std::is_same_v<decltype(sop::ecs::to_underlying(system_id)), uint32_t>,
+                  "SystemId to_underlying should return uint32_t");
+
+    // SubscriptionId 应该返回 uint32_t
+    static_assert(std::is_same_v<decltype(sop::ecs::to_underlying(subscription_id)), uint32_t>,
+                  "SubscriptionId to_underlying should return uint32_t");
+
+    // Phase 应该返回 uint8_t
+    static_assert(std::is_same_v<decltype(sop::ecs::to_underlying(phase)), uint8_t>,
+                  "Phase to_underlying should return uint8_t");
+
+    // Result 应该返回 uint8_t
+    static_assert(std::is_same_v<decltype(sop::ecs::to_underlying(result)), uint8_t>,
+                  "Result to_underlying should return uint8_t");
+
     std::cout << "Types module compilation test passed." << std::endl;
+    std::cout << "Type deduction verification passed." << std::endl;
 
     return 0;
 }

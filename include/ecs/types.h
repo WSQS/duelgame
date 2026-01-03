@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <string>
+#include <type_traits>
 
 namespace sop {
 namespace ecs {
@@ -167,43 +168,18 @@ constexpr SubscriptionId INVALID_SUBSCRIPTION_ID = SubscriptionId(0);
 // 辅助函数：用于序列化和调试
 
 /**
- * @brief 获取 EntityId 的底层值
+ * @brief 获取枚举类型的底层值
  *
- * @param id 实体 ID
- * @return 底层 uint64_t 值
- */
-inline uint64_t to_underlying(EntityId id) {
-    return static_cast<uint64_t>(id);
-}
-
-/**
- * @brief 获取 ComponentTypeId 的底层值
+ * 泛型函数，接受任意枚举类型，返回其底层类型值。
+ * 使用 std::underlying_type 自动推导底层类型。
  *
- * @param id 组件类型 ID
- * @return 底层 uint32_t 值
+ * @tparam E 枚举类型
+ * @param e 枚举值
+ * @return 底层类型值
  */
-inline uint32_t to_underlying(ComponentTypeId id) {
-    return static_cast<uint32_t>(id);
-}
-
-/**
- * @brief 获取 SystemId 的底层值
- *
- * @param id 系统 ID
- * @return 底层 uint32_t 值
- */
-inline uint32_t to_underlying(SystemId id) {
-    return static_cast<uint32_t>(id);
-}
-
-/**
- * @brief 获取 SubscriptionId 的底层值
- *
- * @param id 订阅 ID
- * @return 底层 uint32_t 值
- */
-inline uint32_t to_underlying(SubscriptionId id) {
-    return static_cast<uint32_t>(id);
+template <typename E, std::enable_if_t<std::is_enum_v<E>, int> = 0>
+constexpr auto to_underlying(E e) -> std::underlying_type_t<E> {
+    return static_cast<std::underlying_type_t<E>>(e);
 }
 
 /**
