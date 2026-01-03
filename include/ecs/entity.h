@@ -21,14 +21,14 @@ public:
      *
      * 创建一个无效的实体（id = INVALID_ENTITY_ID）。
      */
-    constexpr Entity() : id_(INVALID_ENTITY_ID) {}
+    constexpr Entity() : m_id(INVALID_ENTITY_ID) {}
 
     /**
      * @brief 构造函数
      *
      * @param id 实体 ID
      */
-    explicit constexpr Entity(EntityId id) : id_(id) {}
+    explicit constexpr Entity(EntityId id) : m_id(id) {}
 
     /**
      * @brief 检查实体是否有效
@@ -36,7 +36,7 @@ public:
      * @return true 表示实体有效，false 表示实体无效
      */
     constexpr bool is_valid() const {
-        return id_ != INVALID_ENTITY_ID;
+        return m_id != INVALID_ENTITY_ID;
     }
 
     /**
@@ -45,7 +45,7 @@ public:
      * @return 实体 ID
      */
     constexpr EntityId id() const {
-        return id_;
+        return m_id;
     }
 
     /**
@@ -55,7 +55,7 @@ public:
      * @return true 表示相等，false 表示不相等
      */
     constexpr bool operator==(const Entity& other) const {
-        return id_ == other.id_;
+        return m_id == other.m_id;
     }
 
     /**
@@ -69,7 +69,7 @@ public:
     }
 
 private:
-    EntityId id_;  ///< 实体 ID
+    EntityId m_id;  ///< 实体 ID
 };
 
 } // namespace ecs
