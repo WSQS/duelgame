@@ -16,5 +16,5 @@ cmake-build-/
 dist/
 
 # Demo executables
-demo/*/_server
-demo/*/_client
+demo/**/*_server
+demo/**/*_client
