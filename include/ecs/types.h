@@ -13,7 +13,7 @@ namespace ecs {
  * 取值范围：1 到 UINT64_MAX（0 保留为无效实体 ID）。
  * 线程安全：EntityId 本身是值类型，线程安全。
  */
-using EntityId = uint64_t;
+enum class EntityId : uint64_t {};
 
 /**
  * @brief 组件类型标识符类型
@@ -22,7 +22,7 @@ using EntityId = uint64_t;
  * 取值范围：1 到 UINT32_MAX（0 保留为无效组件类型 ID）。
  * 线程安全：ComponentTypeId 本身是值类型，线程安全。
  */
-using ComponentTypeId = uint32_t;
+enum class ComponentTypeId : uint32_t {};
 
 /**
  * @brief 系统标识符类型
@@ -31,7 +31,7 @@ using ComponentTypeId = uint32_t;
  * 取值范围：1 到 UINT32_MAX（0 保留为无效系统 ID）。
  * 线程安全：SystemId 本身是值类型，线程安全。
  */
-using SystemId = uint32_t;
+enum class SystemId : uint32_t {};
 
 /**
  * @brief 事件订阅标识符类型
@@ -40,7 +40,7 @@ using SystemId = uint32_t;
  * 取值范围：1 到 UINT32_MAX（0 保留为无效订阅 ID）。
  * 线程安全：SubscriptionId 本身是值类型，线程安全。
  */
-using SubscriptionId = uint32_t;
+enum class SubscriptionId : uint32_t {};
 
 /**
  * @brief 执行阶段枚举
@@ -147,22 +147,104 @@ private:
 /**
  * @brief 常量：无效实体 ID
  */
-constexpr EntityId INVALID_ENTITY_ID = 0;
+constexpr EntityId INVALID_ENTITY_ID = EntityId(0);
 
 /**
  * @brief 常量：无效组件类型 ID
  */
-constexpr ComponentTypeId INVALID_COMPONENT_TYPE_ID = 0;
+constexpr ComponentTypeId INVALID_COMPONENT_TYPE_ID = ComponentTypeId(0);
 
 /**
  * @brief 常量：无效系统 ID
  */
-constexpr SystemId INVALID_SYSTEM_ID = 0;
+constexpr SystemId INVALID_SYSTEM_ID = SystemId(0);
 
 /**
  * @brief 常量：无效订阅 ID
  */
-constexpr SubscriptionId INVALID_SUBSCRIPTION_ID = 0;
+constexpr SubscriptionId INVALID_SUBSCRIPTION_ID = SubscriptionId(0);
+
+// 辅助函数：用于序列化和调试
+
+/**
+ * @brief 获取 EntityId 的底层值
+ *
+ * @param id 实体 ID
+ * @return 底层 uint64_t 值
+ */
+inline uint64_t to_underlying(EntityId id) {
+    return static_cast<uint64_t>(id);
+}
+
+/**
+ * @brief 获取 ComponentTypeId 的底层值
+ *
+ * @param id 组件类型 ID
+ * @return 底层 uint32_t 值
+ */
+inline uint32_t to_underlying(ComponentTypeId id) {
+    return static_cast<uint32_t>(id);
+}
+
+/**
+ * @brief 获取 SystemId 的底层值
+ *
+ * @param id 系统 ID
+ * @return 底层 uint32_t 值
+ */
+inline uint32_t to_underlying(SystemId id) {
+    return static_cast<uint32_t>(id);
+}
+
+/**
+ * @brief 获取 SubscriptionId 的底层值
+ *
+ * @param id 订阅 ID
+ * @return 底层 uint32_t 值
+ */
+inline uint32_t to_underlying(SubscriptionId id) {
+    return static_cast<uint32_t>(id);
+}
+
+/**
+ * @brief 从底层值构造 EntityId
+ *
+ * @param value 底层 uint64_t 值
+ * @return EntityId
+ */
+inline EntityId make_entity_id(uint64_t value) {
+    return EntityId(value);
+}
+
+/**
+ * @brief 从底层值构造 ComponentTypeId
+ *
+ * @param value 底层 uint32_t 值
+ * @return ComponentTypeId
+ */
+inline ComponentTypeId make_component_type_id(uint32_t value) {
+    return ComponentTypeId(value);
+}
+
+/**
+ * @brief 从底层值构造 SystemId
+ *
+ * @param value 底层 uint32_t 值
+ * @return SystemId
+ */
+inline SystemId make_system_id(uint32_t value) {
+    return SystemId(value);
+}
+
+/**
+ * @brief 从底层值构造 SubscriptionId
+ *
+ * @param value 底层 uint32_t 值
+ * @return SubscriptionId
+ */
+inline SubscriptionId make_subscription_id(uint32_t value) {
+    return SubscriptionId(value);
+}
 
 } // namespace ecs
 } // namespace sop

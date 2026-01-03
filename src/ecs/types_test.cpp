@@ -8,33 +8,65 @@
  * 本程序不执行任何实际逻辑，仅用于编译验证。
  */
 int main() {
-    // 测试 EntityId
-    sop::ecs::EntityId entity_id = 1;
+    // 测试 EntityId（强类型枚举）
+    sop::ecs::EntityId entity_id = sop::ecs::make_entity_id(1);
     sop::ecs::EntityId invalid_entity_id = sop::ecs::INVALID_ENTITY_ID;
+    sop::ecs::EntityId entity_id2 = sop::ecs::EntityId(2);
+    uint64_t entity_id_value = sop::ecs::to_underlying(entity_id);
+    bool entity_equal = (entity_id == entity_id2);
+    bool entity_not_equal = (entity_id != entity_id2);
     (void)entity_id;
     (void)invalid_entity_id;
+    (void)entity_id2;
+    (void)entity_id_value;
+    (void)entity_equal;
+    (void)entity_not_equal;
 
-    // 测试 ComponentTypeId
-    sop::ecs::ComponentTypeId component_type_id = 1;
+    // 测试 ComponentTypeId（强类型枚举）
+    sop::ecs::ComponentTypeId component_type_id = sop::ecs::make_component_type_id(1);
     sop::ecs::ComponentTypeId invalid_component_type_id = sop::ecs::INVALID_COMPONENT_TYPE_ID;
+    sop::ecs::ComponentTypeId component_type_id2 = sop::ecs::ComponentTypeId(2);
+    uint32_t component_type_id_value = sop::ecs::to_underlying(component_type_id);
+    bool component_equal = (component_type_id == component_type_id2);
+    bool component_not_equal = (component_type_id != component_type_id2);
     (void)component_type_id;
     (void)invalid_component_type_id;
+    (void)component_type_id2;
+    (void)component_type_id_value;
+    (void)component_equal;
+    (void)component_not_equal;
 
     // 测试 Phase
     sop::ecs::Phase phase = sop::ecs::Phase::Input;
     (void)phase;
 
-    // 测试 SystemId
-    sop::ecs::SystemId system_id = 1;
+    // 测试 SystemId（强类型枚举）
+    sop::ecs::SystemId system_id = sop::ecs::make_system_id(1);
     sop::ecs::SystemId invalid_system_id = sop::ecs::INVALID_SYSTEM_ID;
+    sop::ecs::SystemId system_id2 = sop::ecs::SystemId(2);
+    uint32_t system_id_value = sop::ecs::to_underlying(system_id);
+    bool system_equal = (system_id == system_id2);
+    bool system_not_equal = (system_id != system_id2);
     (void)system_id;
     (void)invalid_system_id;
+    (void)system_id2;
+    (void)system_id_value;
+    (void)system_equal;
+    (void)system_not_equal;
 
-    // 测试 SubscriptionId
-    sop::ecs::SubscriptionId subscription_id = 1;
+    // 测试 SubscriptionId（强类型枚举）
+    sop::ecs::SubscriptionId subscription_id = sop::ecs::make_subscription_id(1);
     sop::ecs::SubscriptionId invalid_subscription_id = sop::ecs::INVALID_SUBSCRIPTION_ID;
+    sop::ecs::SubscriptionId subscription_id2 = sop::ecs::SubscriptionId(2);
+    uint32_t subscription_id_value = sop::ecs::to_underlying(subscription_id);
+    bool subscription_equal = (subscription_id == subscription_id2);
+    bool subscription_not_equal = (subscription_id != subscription_id2);
     (void)subscription_id;
     (void)invalid_subscription_id;
+    (void)subscription_id2;
+    (void)subscription_id_value;
+    (void)subscription_equal;
+    (void)subscription_not_equal;
 
     // 测试 Result
     sop::ecs::Result result = sop::ecs::Result::Success;
